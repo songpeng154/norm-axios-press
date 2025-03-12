@@ -1,14 +1,14 @@
 import type { Theme } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
 import Demo from '../components/Demo.vue'
+import Layout from '../components/Layout.vue'
 import 'virtual:uno.css'
 import './style.css'
-import Layout from '../components/Layout.vue'
 
 export default {
   extends: DefaultTheme,
-  Layout: Layout,
-  enhanceApp({ app, router, siteData }) {
+  Layout,
+  enhanceApp({ app }) {
     app.component('Demo', Demo)
   },
 } satisfies Theme

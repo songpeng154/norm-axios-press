@@ -3,30 +3,27 @@
 layout: home
 
 hero:
-  name: "Norm Fetch"
-  text: "基于 Axios 的约定式请求库"
-  tagline: "高效开发，极致体验"
+  name: "Norm Axios"
+  text: "约定式请求库"
+  tagline: "上手简单、高效开发，极致体验"
   image:
     src: /logo.png
-    alt: Norm Fetch
+    alt: Norm Axios
   actions:
     - theme: brand
-      text: 开始使用
-      link: /markdown-examples
+      text: 快速上手
+      link: /document/start/introduction
     - theme: alt
-      text: 为什么选择Norm Fetch？
-      link: /api-examples
-    - theme: alt
-      text: 预览项目
+      text: 最佳实践
       link: /api-examples
 features: 
-  - title: 最新技术栈
-    icon: 🔨
-    details: 基于 vue3.4 、vite5 、typeScript 、vue-query 、ant-design-vue 、pinia 、unocss
-  - title: 主题配置
+  - title: 统一多后端服务的数据结构
+    icon: 🌐
+    details: 解决了多个后台服务，后台服务的数据结构可能不一致的问题
+  - title: 简易请求
     icon: ✏️
-    details: 统一的主题配置、适配暗黑主题。通过 unocss 灵活使用
-  - title: 全面的解决方案
+    details: 简化了数据获取流程，自动处理请求状态，减少了冗余代码。
+  - title: TypeScript
     icon: 🍴
-    details: 基于各种插件实现表单、表格、图标、异步数据管理、全局状态管理、本地存储解决方案
+    details: 完全使用 TypeScript 编写，具有强大的类型提示
 ---

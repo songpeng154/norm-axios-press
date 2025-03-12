@@ -5,30 +5,38 @@
   "main": "index.js",
   "scripts": {
     "docs:dev": "vitepress dev ",
-    "docs:build": "vitepress build ",
+    "docs:build": "vitepress build",
     "docs:preview": "vitepress preview "
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@antfu/eslint-config": "^4.3.0",
-    "@iconify/json": "^2.2.308",
-    "@shikijs/markdown-it": "^3.0.0",
+    "@antfu/eslint-config": "^4.8.1",
+    "@faker-js/faker": "^9.6.0",
+    "@iconify/json": "^2.2.315",
+    "@shikijs/markdown-it": "^3.2.1",
     "@types/markdown-it": "^14.1.2",
-    "@types/node": "^22.13.4",
+    "@types/node": "^22.13.10",
+    "@unocss/eslint-plugin": "^66.0.0",
     "@unocss/preset-icons": "^66.0.0",
-    "eslint": "^9.20.1",
+    "eslint": "^9.22.0",
     "markdown-it": "^14.1.0",
     "naive-ui": "^2.41.0",
-    "sass-embedded": "^1.85.0",
-    "shiki": "^3.0.0",
+    "sass-embedded": "^1.85.1",
+    "shiki": "^3.2.1",
+    "typescript": "~5.6.3",
     "unocss": "^66.0.0",
+    "vite-plugin-fake-server": "^2.2.0",
+    "vite-plugin-mock": "^3.0.2",
     "vitepress": "1.6.3"
   },
   "dependencies": {
-    "@vueuse/core": "^12.7.0",
+    "@vueuse/core": "^12.8.2",
+    "axios": "latest",
     "markdown-it-container": "^4.0.0",
+    "mockjs": "^1.1.0",
+    "norm-axios": "1.0.0-beta.32",
     "vue": "^3.5.13"
   }
 }

@@ -1,10 +1,8 @@
 <script lang="ts" setup>
-import { getComponent } from '../utils'
-import { codeToHtml } from 'shiki'
-import { computed, onBeforeMount, ref } from 'vue'
 import { useClipboard, useToggle } from '@vueuse/core'
-import { NButton,useMessage,NCollapseTransition } from 'naive-ui'
-import { run } from 'node:test'
+import { codeToHtml } from 'shiki'
+import { onBeforeMount, ref } from 'vue'
+import { getComponent } from '../utils'
 
 const props = defineProps<{
   path: string
@@ -15,8 +13,9 @@ const files = import.meta.glob('../examples/**/*.vue', {
   eager: true,
 })
 
-const message = useMessage()
-const [ isShow, toggleShow ] = useToggle()
+const [isShow, toggleShow] = useToggle()
+const [isCopySuccess, toggleCopySuccess] = useToggle()
+const [isCopyFail, toggleCopyFail] = useToggle()
 const clipboard = useClipboard()
 
 const Example = getComponent(files, props.path)
@@ -24,11 +23,16 @@ const Example = getComponent(files, props.path)
 const html = ref('')
 
 const onCopy = () => {
-  clipboard.copy(decodeURIComponent(props.sourceCode)).then(() => {
-    message.success('复制成功')
-  }).catch(() => {
-    message.error('复制失败')
-  })
+  clipboard
+    .copy(decodeURIComponent(props.sourceCode))
+    .then(() => {
+      toggleCopySuccess(true)
+      setTimeout(() => toggleCopySuccess(false), 1000)
+    })
+    .catch(() => {
+      toggleCopyFail(true)
+      setTimeout(() => toggleCopyFail(false), 1000)
+    })
 }
 
 onBeforeMount(async () => {
@@ -46,34 +50,37 @@ onBeforeMount(async () => {
   <div class="demo">
     <div class="card">
       <div class="card-content">
-        <n-button>test33</n-button>
-        <p>test</p>
-        <p>test</p>
-        <p>test</p>
+        <Example />
       </div>
       <div class="card-action">
         <div>
           <a v-if="runUrl" :href="runUrl">在线运行</a>
         </div>
         <div class="card-action-icon-group">
-          <div @click="onCopy" class="icon i-ep:copy-document"/>
-          <div @click="toggleShow()" class="icon i-ic:baseline-code"/>
+          <div v-if="(!isCopySuccess && !isCopyFail)" class="icon i-ep:copy-document" @click="onCopy" />
+          <div v-if="isCopySuccess" class="success">
+            复制成功！
+          </div>
+          <div v-if="isCopyFail" class="fail">
+            复制失败！
+          </div>
+          <div
+            class="icon i-ic:baseline-code"
+            @click="toggleShow()"
+          />
         </div>
       </div>
-      <n-collapse-transition :show="isShow">
-        <div class="code-container" v-show="isShow">
-          <div class="code" v-html="html"></div>
-        </div>
-      </n-collapse-transition>
+      <div v-show="isShow" class="code-container">
+        <div class="code" v-html="html" />
+      </div>
     </div>
-
   </div>
 </template>
 
 <style lang="scss" scoped>
 .card {
-  background: var(--vp-c-bg-soft);
-  border: 1px solid var(--vp-c-bg-soft);
+  //background: var(--vp-c-bg-soft);
+  border: 1px solid var(--vp-c-divider);
   margin-top: 10px;
   border-radius: 12px;
 
@@ -87,8 +94,8 @@ onBeforeMount(async () => {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-top: 1px solid var(--vp-c-gutter);
-
+    border-top: 1px solid var(--vp-c-divider);
+    height: 40px;
     a {
       font-size: 14px;
     }
@@ -102,13 +109,26 @@ onBeforeMount(async () => {
         cursor: pointer;
         font-size: 16px;
       }
+
+      div{
+        font-size: 12px;
+      }
+
+      .success{
+        color: #0da608;
+      }
+
+      .fail{
+        color: red;
+      }
     }
   }
 }
 
 .code-container {
-  border-top: 1px solid var(--vp-c-gutter);
+  border-top: 1px solid var(--vp-c-divider);
   background: var(--vp-c-bg-soft);
+  width: 100%;
+  overflow: auto;
 }
-
 </style>

@@ -18,15 +18,13 @@ export const setupContainerDemo = (md: MarkdownIt) => {
         let runOnlineUrl = ''
         if (!token) return new Error('请传递Demo组件路径')
         const arr = token.content.split('\n')
-        console.log(arr)
         componentSrc = arr[0]
         runOnlineUrl = arr[1]
 
-        const sourceCode = fs.readFileSync(path.resolve(__dirname, `../../examples/${componentSrc}.vue`), 'utf8')
+        const sourceCode = fs.readFileSync(path.resolve(__dirname, `../../examples/${ componentSrc }.vue`), 'utf8')
 
-        return `<Demo path="${componentSrc}.vue" source-code="${encodeURIComponent(sourceCode)}">`
-      }
-      else
+        return `<Demo run-url="${ runOnlineUrl }" path="${ componentSrc }.vue" source-code="${ encodeURIComponent(sourceCode) }">`
+      } else
         return '</Demo>'
     },
   })
