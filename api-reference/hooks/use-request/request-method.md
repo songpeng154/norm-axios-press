@@ -9,6 +9,7 @@ outline: deep
 `RequestState` 是 [useRequest](./home.md) 返回的方法类型。
 
 ## 类型声明
+
 ```typescript
 export interface RequestMethod<
   // 数据
@@ -28,17 +29,13 @@ export interface RequestMethod<
    * 与 run 用法一致，加了防抖功能
    * @param args 请求参数
    */
-  debounceRun: DebouncedFunction<
-    (...args: TParams) => Promise<Undefinable<TFormatData>>
-  >
+  debounceRun: DebouncedFunction<(...args: TParams) => Promise<Undefinable<TFormatData>>>
 
   /**
    * 与 run 用法一致，加了节流功能
    * @param args 请求参数
    */
-  throttleRun: DebouncedFunction<
-    (...args: TParams) => Promise<Undefinable<TFormatData>>
-  >
+  throttleRun: DebouncedFunction<(...args: TParams) => Promise<Undefinable<TFormatData>>>
 
   /**
    * 使用上次的 params，重新调用 run
@@ -55,9 +52,14 @@ export interface RequestMethod<
   /**
    * 更改 data 数据,不会更改 rawData 和 response 中的数据
    */
-  mutate: (
-    newData: TFormatData | ((oldData: TFormatData) => TFormatData),
-  ) => void
+  mutate: (newData: TFormatData | ((oldData: TFormatData) => TFormatData),) => void
+
+  /**
+   * 乐观更新,立即更改 data 数据，并且自动在背后发起请求
+   * 如果更新失败，则会还原到更新之前的数据
+   * 不会更改 rawData 和 response 中的数据
+   */
+  optimisticUpdate: (newData: TFormatData | ((oldData: TFormatData) => TFormatData), params: TParams) => void
 }
 ```
 
@@ -148,6 +150,25 @@ export interface RequestMethod<
 | 名称        | 类型                                                      | 默认值 | 描述  |
 |:----------|:--------------------------------------------------------|:----|:----|
 | `newData` | `TFormatData \| ((oldData: TFormatData) => TFormatData` |     | 新数据 |
+
+#### 返回值
+
+`void`
+
+### optimisticUpdate
+
+乐观更新,立即更改 `data` 数据，并且自动在背后发起请求
+
+如果更新失败，则会还原到更新之前的数据
+
+不会更改 `rawData` 和 `response` 中的数据
+
+#### 入参
+
+| 名称        | 类型                                                      | 默认值 | 描述  |
+|:----------|:--------------------------------------------------------|:----|:----|
+| `newData` | `TFormatData \| ((oldData: TFormatData) => TFormatData` |     | 新数据 |
+| `params`  | `TParams`                                               |     | 入参  |
 
 #### 返回值
 

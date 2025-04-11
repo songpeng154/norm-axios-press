@@ -42,7 +42,7 @@ export interface PaginationOptions {
   addedMode?: boolean
 
   /**
-   * 当 page 与 pageSize 变化的时候自动调用服务
+   * 当 page 变化的时候自动调用服务
    * 当 pageWatch 与 watchSource 同时设置为 true 后，page 或者 pageSize变化的时候会调用两遍服务，这个问题可以设置 pageWatch 或者 watchSource来解决
    * @default true
    */
@@ -101,7 +101,7 @@ export interface PaginationOptions {
 * `可选` - `boolean`
 * 默认值：`true`
 
-当 [page](./pagination-result) 与 [pageSize](./pagination-result) 变化的时候自动调用服务
+当 [page](./pagination-result) 变化的时候自动调用服务
 
 当 `pageWatch` 与 [watchSource](../use-request/request-options#watchsource) 同时设置为 `true`
 后，[page](./pagination-result) 或者 [pageSize](./pagination-result) 变化的时候会调用两遍服务，这个问题可以设置

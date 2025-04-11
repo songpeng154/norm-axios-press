@@ -63,4 +63,4 @@ function usePagination<
 
 #### 返回值
 
-[PaginationResult<TData, TParams, TFormatData, TRawData>](./pagination-options.md)
+[PaginationResult<TData, TParams, TFormatData, TRawData>](./pagination-result.md)

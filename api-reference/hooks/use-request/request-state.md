@@ -111,6 +111,6 @@ export interface RequestState<
 ### params
 
 * `必填` -  `TParams`
-* 默认值：[defaultParams](request-options)
+* 默认值：[defaultParams](./request-options#defaultParams)
 
 当次执行的 [service](request-service-fn) 的参数数组。比如你触发了 `run(1, 2, 3)`，则 `params` 等于 `[1, 2, 3]`

@@ -60,8 +60,7 @@ export default defineConfig({
       },
       {
         text: ' 最佳实践',
-        link: '/frontEndGuide/start/introduction',
-        activeMatch: '^/document/',
+        link: 'http://www.baidu.com',
       },
     ],
 
@@ -84,12 +83,33 @@ export default defineConfig({
           ],
         },
         {
+          text: 'hook 全局配置',
+          link: '/document/global-config',
+        },
+        {
           text: 'use-request',
           base: '/document/use-request',
           items: [
             { text: '介绍', link: '/introduction' },
             { text: '基础用法', link: '/basic-usage' },
+            { text: '保持&延迟Loading', link: '/loading' },
+            { text: '防抖', link: '/debounce' },
+            { text: '节流', link: '/throttle' },
+            { text: '缓存 & SWR', link: '/cache-swr' },
+            { text: '数据突变', link: '/data-mutation' },
+            { text: '错误重试', link: '/error-retry' },
+            { text: '依赖刷新', link: '/dependency-refresh' },
+            { text: '轮询请求', link: '/polling-request' },
+            { text: '依赖请求', link: '/dependency-request' },
+            { text: '并行请求', link: '/parallel-request' },
+            { text: '伪取消请求', link: '/cancel-request' },
+            { text: '格式化数据', link: '/formatting-data' },
+            { text: '窗口聚焦时重新请求', link: '/refresh-on-window-focus' },
           ],
+        },
+        {
+          text: 'use-pagination',
+          link: '/document/use-pagination',
         },
       ],
       '/api-reference': [

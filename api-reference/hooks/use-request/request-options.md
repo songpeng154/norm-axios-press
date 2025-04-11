@@ -9,6 +9,7 @@ outline: deep
 `RequestState` 是 [useRequest](./home.md) 返回的数据状态类型。
 
 ## 类型声明
+
 ```typescript
 import type { AxiosResponse } from 'axios'
 import type { EffectScope, MaybeRef, Ref, WatchSource } from 'vue'
@@ -179,7 +180,7 @@ export interface RequestOptions<
   /**
    * 格式化数据
    */
-  formatData?: (data: TData, params: TParams, response: AxiosResponse<TRawData>) => TFormatData
+  formatData?: (data: TData, params: TParams, response?: AxiosResponse<TRawData>) => TFormatData
 
   /**
    * 请求之前执行
@@ -196,7 +197,7 @@ export interface RequestOptions<
   onSuccess?: (
     data: TFormatData,
     params: TParams,
-    response: AxiosResponse<TRawData>,
+    response?: AxiosResponse<TRawData>,
   ) => void
 
   /**
@@ -208,7 +209,7 @@ export interface RequestOptions<
   onError?: (
     error: ResponseError,
     params: TParams,
-    response: AxiosResponse<TRawData>,
+    response?: AxiosResponse<TRawData>,
   ) => void
 
   /**
@@ -360,13 +361,6 @@ export interface RequestOptions<
 
 屏幕不可见时是否继续轮询（需开启 pollingInterval）
 
-### pollingWhenWindowBlur
-
-* `可选` - `MaybeRef<boolean>`
-* 默认值：`true`
-
-窗口失去焦点时是否继续轮询
-
 ### pollingErrorRetryCount
 
 * `可选` - `MaybeRef<number>`
@@ -407,17 +401,47 @@ export interface RequestOptions<
 
 ## 方法
 
+### getCache
+
+自定义获取缓存数据
+
+#### 入参
+
+| 名称         | 类型        | 默认值 | 描述      |
+|:-----------|:----------|:----|:--------|
+| `cacheKey` | `string`  |     | 缓存`key` |
+| `params`   | `TParams` |     | 入参      |
+
+#### 返回值
+
+[CachedData<TData, TParams, TFormatData, TRawData>](/api-reference/hooks/use-request/cached-data.md)
+
+### setCache
+
+设置自定义缓存
+
+#### 入参
+
+| 名称          | 类型                                                            | 默认值 | 描述      |
+|:------------|:--------------------------------------------------------------|:----|:--------|
+| `cacheKey`  | `string`                                                      |     | 缓存`key` |
+| `cacheData` | [CachedData](/api-reference/hooks/use-request/cached-data.md) |     | 缓存数据    |
+
+#### 返回值
+
+`void`
+
 ### formatData
 
 自定义数据格式化函数
 
 #### 入参
 
-| 名称         | 类型                        | 默认值 | 描述        |
-|:-----------|:--------------------------|:----|:----------|
-| `data`     | `TData`                   |     | 数据        |
-| `params`   | `TParams`                 |     | 入参        |
-| `response` | `AxiosResponse<TRawData>` |     | axios原始响应 |
+| 名称         | 类型                                     | 默认值 | 描述        |
+|:-----------|:---------------------------------------|:----|:----------|
+| `data`     | `TData`                                |     | 数据        |
+| `params`   | `TParams`                              |     | 入参        |
+| `response` | `AxiosResponse<TRawData> \| undefined` |     | axios原始响应 |
 
 #### 返回值
 
@@ -443,11 +467,11 @@ export interface RequestOptions<
 
 #### 入参
 
-| 名称         | 类型                        | 默认值 | 描述        |
-|:-----------|:--------------------------|:----|:----------|
-| `data`     | `TFormatData`             |     | 数据        |
-| `params`   | `TParams`                 |     | 入参        |
-| `response` | `AxiosResponse<TRawData>` |     | axios原始响应 |
+| 名称         | 类型                                     | 默认值 | 描述        |
+|:-----------|:---------------------------------------|:----|:----------|
+| `data`     | `TFormatData`                          |     | 数据        |
+| `params`   | `TParams`                              |     | 入参        |
+| `response` | `AxiosResponse<TRawData> \| undefined` |     | axios原始响应 |
 
 #### 返回值
 
@@ -459,11 +483,11 @@ export interface RequestOptions<
 
 #### 入参
 
-| 名称         | 类型                                                         | 默认值 | 描述        |
-|:-----------|:-----------------------------------------------------------|:----|:----------|
-| `error`    | [ResponseError](/api-reference/common-type/response-error) | -   | 错误信息      |
-| `params`   | `TParams`                                                  | -   | 入参        |
-| `response` | `AxiosResponse<TRawData>`                                  | -   | axios原始响应 |
+| 名称         | 类型                                                                       | 默认值 | 描述        |
+|:-----------|:-------------------------------------------------------------------------|:----|:----------|
+| `error`    | [ResponseError](/api-reference/common-type/response-error)               | -   | 错误信息      |
+| `params`   | `TParams`                                                                | -   | 入参        |
+| `response` | `AxiosResponse<TRawData>                                   \| undefined` | -   | axios原始响应 |
 
 #### 返回值
 
@@ -482,3 +506,63 @@ export interface RequestOptions<
 #### 返回值
 
 `void`
+
+### onFinallyFetchDone
+
+当连续请求的时候，最后一个服务请求完成之后触发
+
+#### 入参
+
+| 名称       | 类型        | 默认值 | 描述 |
+|:---------|:----------|:----|:---|
+| `params` | `TParams` | -   | 入参 |
+
+#### 返回值
+
+`void`
+
+[//]: # ()
+
+[//]: # (### onMutate)
+
+[//]: # ()
+
+[//]: # (通过 [mutate]&#40;/api-reference/hooks/use-request/request-method.md#mutate&#41; 修改数据时触发)
+
+[//]: # ()
+
+[//]: # (#### 入参)
+
+[//]: # ()
+
+[//]: # (| 名称     | 类型            | 默认值 | 描述 |)
+
+[//]: # (|:-------|:--------------|:----|:---|)
+
+[//]: # (| `data` | `TFormatData` |     | 数据 |)
+
+[//]: # ()
+
+[//]: # (#### 返回值)
+
+[//]: # ()
+
+[//]: # (`void`)
+
+[//]: # ()
+
+[//]: # ()
+
+[//]: # (### onCancel)
+
+[//]: # ()
+
+[//]: # (通过 [cancel]&#40;/api-reference/hooks/use-request/request-method.md#cancel&#41; 取消请求时触发)
+
+[//]: # ()
+
+[//]: # (#### 返回值)
+
+[//]: # ()
+
+[//]: # (`void`)

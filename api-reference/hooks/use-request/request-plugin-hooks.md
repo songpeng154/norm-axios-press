@@ -25,9 +25,18 @@ export interface RequestPluginHooks<
 > {
   /**
    * 请求之前触发
-   * @return boolean ｜ void
    */
-  onBefore?: (params: TParams, stopExec: () => void) => void
+  onBefore?: (params: TParams) => {
+    // 是否直接 return,停止后续执行
+    isReturned?: boolean
+  } | void
+
+  /**
+   * 请求开始时触发
+   */
+  onRequest?: (service: (...params: TParams) => Promise<ResponseContent<TData, TRawData>>, params: TParams) => {
+    servicePromise: Promise<ResponseContent<TData, TRawData>>
+  }
 
   /**
    * 请求失败时触发
@@ -60,7 +69,7 @@ export interface RequestPluginHooks<
   /**
    * 通过 mutate 修改数据时触发
    */
-  onMutate?: (data: TFormatData) => void
+  onMutate?: (newData: TFormatData) => void
 
   /**
    * 通过 cancel 取消请求时触发
@@ -85,14 +94,34 @@ export interface RequestPluginHooks<
 
 #### 入参
 
-| 名称         | 类型           | 默认值 | 描述     |
-|:-----------|:-------------|:----|:-------|
-| `params`   | `TParams`    |     | 请求参数   |
-| `stopExec` | `() => void` |     | 停止后续执行 |
+| 名称       | 类型        | 默认值 | 描述   |
+|:---------|:----------|:----|:-----|
+| `params` | `TParams` |     | 请求参数 |
 
 #### 返回值
 
-`void`
+`{ isReturned?: boolean } | void`
+
+| 名称           | 类型        | 必填  | 描述                   |
+|:-------------|:----------|:----|----------------------|
+| `isReturned` | `boolean` | `否` | 是否直接 `return`,停止后续执行 |
+
+### onRequest
+
+请求开始时触发
+
+#### 入参
+
+| 名称        | 类型                                                                  | 默认值 | 描述   |
+|:----------|:--------------------------------------------------------------------|:----|:-----|
+| `service` | `(...params: TParams) => Promise<ResponseContent<TData, TRawData>>` |     | 请求服务 |
+| `params`  | `TParams`                                                           |     | 请求参数 |
+
+#### 返回值
+
+| 名称               | 类型                                          | 必填  | 描述          |
+|:-----------------|:--------------------------------------------|:----|-------------|
+| `servicePromise` | `Promise<ResponseContent<TData, TRawData>>` | `是` | 服务`Promise` |
 
 ### onError
 
@@ -147,7 +176,6 @@ export interface RequestPluginHooks<
 #### 返回值
 
 `void`
-
 
 ### onMutate
 

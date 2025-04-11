@@ -6,6 +6,7 @@ outline: deep
 
 基于 `Vue Composition API` 封装的请求 Hook，支持自动状态管理、防抖/节流、轮询、缓存、数据格式化等特性，适用于返回类型是 [ResponseContent](/api-reference/common-type/response-content.md) 的异步数据请求。
 
+[具体 Api](/api-reference/hooks/use-request/home.md)
 ## 特性
 
 * 响应式数据

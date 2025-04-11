@@ -4,7 +4,7 @@ outline: deep
 
 [useRequest](./home) / **RequestPluginImplement**
 
-# 类型：RequestPluginImplement
+# 接口：RequestPluginImplement
 
 插件实现类型
 
