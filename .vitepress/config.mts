@@ -24,6 +24,13 @@ export default defineConfig({
     plugins: [
       UnoCSS(),
     ],
+    css: {
+      preprocessorOptions: {
+        scss: {
+          api: 'modern-compiler',
+        },
+      },
+    },
   },
   themeConfig: {
     logo: '/assets/images/logo.png',

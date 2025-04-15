@@ -17,7 +17,6 @@ const { loading } = useRequest(getFakeData, {
   errorRetryCount: 3,
   errorRetryInterval: 500,
   onError() {
-    console.log(1)
     count.value += 1
   },
 })

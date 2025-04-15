@@ -1,7 +1,7 @@
 # 全局配置
 
 可以通过[useGlobalConfigProvider](/api-reference/hooks/use-global-config-provider/home.md)
-为[useRequest](/document/use-request/introduction.md)和[usePagination](/document/use-pagination/introduction.md)
+为[useRequest](/document/use-request/introduction.md)和[usePagination](/document/use-pagination.md)
 设置统一的全局配置，避免每个请求都重复配置。
 
 [useGlobalConfigProvider](/api-reference/hooks/use-global-config-provider/home.md)是基于`vue3的provide/inject`

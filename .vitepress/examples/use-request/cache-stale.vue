@@ -6,7 +6,6 @@ const asyncAwait = async (millisecond: number) => new Promise(resolve => setTime
 
 // 获取假数据
 const getFakeData = async (): Promise<ResponseContent<number>> => {
-  console.log('执行')
   await asyncAwait(2000)
 
   return [Date.now(), undefined]
