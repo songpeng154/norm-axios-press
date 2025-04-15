@@ -9,6 +9,7 @@ export default {
   extends: DefaultTheme,
   Layout,
   enhanceApp({ app }) {
-    app.component('Demo', Demo)
+    if (!import.meta.env.SSR)
+      app.component('Demo', Demo)
   },
 } satisfies Theme
