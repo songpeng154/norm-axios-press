@@ -17,7 +17,7 @@ export default defineConfig({
     },
     lineNumbers: true,
   },
-  base: '/norm-axios/',
+  base: '/norm-axios-press/',
   vite: {
     server: {
       hmr: true,
