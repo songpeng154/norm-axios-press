@@ -67,7 +67,11 @@ export default defineConfig({
       },
       {
         text: ' 最佳实践',
-        link: 'http://www.baidu.com',
+        link: 'https://github.com/SurgeJS/surge-admin',
+      },
+      {
+        text: ' 联系作者',
+        link: '/contact',
       },
     ],
 
