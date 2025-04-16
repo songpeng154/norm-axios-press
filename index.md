@@ -13,9 +13,9 @@ hero:
     - theme: brand
       text: 快速上手
       link: /document/start/introduction
-    - theme: alt
-      text: 最佳实践
-      link: /api-examples
+#    - theme: alt
+#      text: 最佳实践
+#      link: https://github.com/SurgeJS/surge-admin
 features: 
   - title: 统一多后端服务的数据结构
     icon: 🌐

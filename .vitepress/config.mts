@@ -65,10 +65,10 @@ export default defineConfig({
         link: '/api-reference/common-type/home',
         activeMatch: '^/api-reference/',
       },
-      {
-        text: ' 最佳实践',
-        link: 'https://github.com/SurgeJS/surge-admin',
-      },
+      // {
+      //   text: ' 最佳实践',
+      //   link: 'https://github.com/SurgeJS/surge-admin',
+      // },
       {
         text: ' 联系作者',
         link: '/contact',

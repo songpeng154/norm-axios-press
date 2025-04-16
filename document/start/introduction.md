@@ -13,8 +13,37 @@ outline: deep
 * 简化了数据获取流程，自动处理请求状态，减少了冗余代码。
 * 简化了分页处理，自动管理分页状态，减少了手动编写分页逻辑的麻烦。
 
-## 特性
+```vue
 
+<template>
+  <div>
+    <div v-if="loading">加载中...</div>
+    <div v-if="error">异常啦</div>
+    <div v-if="list">列表数据（取的是后台响应内容data中的 list）: {{ list }}</div>
+    <div v-if="rawData">原始数据（包含 code、msg、data）: {{ rawData }}</div>
+    <div v-if="response">axios 响应内容: {{ response }}</div>
+    <div v-if="page">当前分页: {{ page }}</div>
+    <div v-if="pageSize"> 每页数量: {{ pageSize }}</div>
+    <div v-if="total"> 列表总数: {{ total }}</div>
+    <div v-if="totalPage"> 分页总数: {{ totalPage }}</div>
+  </div>
+</template>
+<script lang="ts" setup>
+  import { usePagination } from 'norm-axios'
+
+  const {
+    list,
+    loading,
+    error,
+    rawData,
+    response,
+    page,
+    pageSize,
+    total,
+    totalPage,
+  } = usePagination(({ page, pageSize }) => getUserList({ page, pageSize }))
+</script>
+```
 * 🌐 统一多后端服务的数据结构
 * ⚡ 响应式数据
 * 🔄 轮询请求

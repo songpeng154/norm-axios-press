@@ -177,8 +177,8 @@ const setUserinfo = async (id) => {
     <div v-if="loading">加载中...</div>
     <div v-if="error">异常啦</div>
     <div v-if="data">数据（取的是后台响应内容的 data）: {{ data }}</div>
-    <div v-if="data">原始数据（包含 code、msg、data）: {{ data }}</div>
-    <div v-if="response">axios 响应内容: {{ data }}</div>
+    <div v-if="rawData">原始数据（包含 code、msg、data）: {{ rawData }}</div>
+    <div v-if="response">axios 响应内容: {{ response }}</div>
   </div>
 </template>
 <script lang="ts" setup>
